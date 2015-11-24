@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="subjectAdd" class="cn.hp.onlinetest.action.SubjectAddAction">
+			<result name="input">/teacher/subjectAdd.jsp</result>
+			<result name="success" type="redirect">/teacher/subjectAdd.jsp</result>
+		</action>
+		<!-- 查看试题 -->
+		<action name="subjectPartcular" class="cn.hp.onlinetest.action.SubjectParticularAction">			
+			<result name="success" >/teacher/subjectShow.jsp</result>
+		</action>
+		<!-- 更新试题前查出试题 -->	
+		<action name="SubjectActionBefore" class="cn.hp.onlinetest.action.SubjectParticularAction">			
+			<result name="success" >/teacher/subjectUpdate.jsp</result>
+		</action>	
+		<!-- 更新试题 -->
+		<action name="subjectUpdate" class="cn.hp.onlinetest.action.SubjectUpdateAction">			
+			<result name="success" >/teacher/subjectUpdate.jsp</result>
+			<result name="error" >/teacher/subjectUpdate.jsp</result>
+		</action>
+		<!-- 删除试题 -->
+		<action name="subjectDelete" class="cn.hp.onlinetest.action.SubjectDeleteAction">
+		<!-- 跳转到试题列表页 -->		
+			<result name="success" type="chain">SubjectList</result>
+		</action>
+		<!-- 试题列表 -->
+		<action name="SubjectList" class="cn.hp.onlinetest.action.SubjectListAction">			
+			<result name="success" >/teacher/subjectManage.jsp</result>
+		</action>
+		<!-- 模糊查询 -->
+		<action name="LikeQuery" class="cn.hp.onlinetest.action.LikeQuerySubjectAction">			
+			<result name="success" >/teacher/subjectManage.jsp</result>
+		</action>
+		<!-- 根据姓名查询学生 -->
+		<action name="queryStudentByName" class="cn.hp.onlinetest.action.QueryStudentByNameAction">			
+			<result name="success" >/teacher/studentManage.jsp</result>
+		</action>
+		<!-- 根据班级编号查询学生 -->
+		<action name="queryStudentByClass" class="cn.hp.onlinetest.action.QueryStudentByClass">			
+			<result name="success" >/teacher/studentManage.jsp</result>
+		</action>
+		<!-- 登录 -->
+		<action name="login" class="cn.hp.onlinetest.action.LoginAction">			
+			<result name="studentSuccess" type="chain">getRandomSubject</result>
+			<result name="teacherSuccess" type="redirect">/teacher/index.html</result>
+			<result name="input" type="redirect">/login.jsp</result>			
+		</action>
+		<!-- 答题页面 -->
+		<action name="getRandomSubject" class="cn.hp.onlinetest.action.GetRandomSubject">			
+			<result name="success" >/student/index.jsp</result>
+		</action>
+		<!-- 计算成绩 -->
+		<action name="submitExam" class="cn.hp.onlinetest.action.SubmitExamAction">			
+			<result name="success" >/student/examResult.jsp</result>
+		</action>
+		<!-- 查看答案 -->
+		<action name="showSubjectAnswer" class="cn.hp.onlinetest.action.ShowSubjectAnswer">			
+			<result name="success" >/student/showAnswer.jsp</result>
+		</action>
+	</package>
+</struts>
